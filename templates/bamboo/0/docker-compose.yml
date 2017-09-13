@@ -1,0 +1,92 @@
+version: '2'
+services:
+  Composer:
+    image: concentric/bamboo
+    stdin_open: true
+    tty: true
+    links:
+    - Redis:redis
+    - Database:database
+    volumes_from:
+    - Web
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.start_once: 'true'
+  Web:
+    image: concentric/bamboo
+    environment:
+      DB_HOST: database
+      DB_USER: bamboo
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: bamboo
+    stdin_open: true
+    volumes:
+    - /var/www/html
+    tty: true
+    links:
+    - Redis:redis
+    - Database:database
+    ports:
+    - 80/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.sidekicks: Composer,DrupalConsole,Drush
+      rap.host: ${DOMAIN_NAME}
+  Database:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: bamboo
+      MYSQL_USER: bamboo
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    stdin_open: true
+    volumes:
+    - /var/lib/mysql
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  Redis:
+    image: redis:3.2
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  DrupalConsole:
+    image: drupalconsole/console:1.0
+    environment:
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USER: bamboo
+      DB_HOST: database
+      DB_NAME: bamboo
+    entrypoint:
+    - /bin/sh
+    stdin_open: true
+    tty: true
+    links:
+    - Redis:redis
+    - Database:database
+    volumes_from:
+    - Web
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.start_once: 'true'
+  Drush:
+    image: drush/drush
+    environment:
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USER: bamboo
+      DB_HOST: database
+      DB_NAME: bamboo
+    working_dir: /var/www/html/web
+    entrypoint:
+    - /bin/sh
+    stdin_open: true
+    tty: true
+    links:
+    - Redis:redis
+    - Database:database
+    volumes_from:
+    - Web
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.start_once: 'true'

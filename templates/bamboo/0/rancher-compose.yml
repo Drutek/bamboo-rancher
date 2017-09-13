@@ -1,0 +1,13 @@
+.catalog:
+ name: "Initial Version"
+ version: "v0.0.1"
+ questions:
+    - variable: DOMAIN_NAME
+      label: "Provide a domain name for the project"
+      default: "www.example.com"
+      type: string
+      required: true
+    - variable: DB_PASSWORD
+      label: "Provide a password for the database"
+      type: password
+      required: true

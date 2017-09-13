@@ -1,0 +1,7 @@
+name: Bamboo
+description: "Creates a copy of the bamboo platform"
+version: "v0.0.1"
+category: Websites
+maintainer: Concentric
+license: MIT
+projectURl: "https://github.com/Drutek/bamboo-template"
