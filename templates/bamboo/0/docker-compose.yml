@@ -19,9 +19,10 @@ services:
       DB_USER: bamboo
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: bamboo
-      AWS_KEY: ${AWS_KEY}
-      AWS_SECRET: ${AWS_SECRET}
-      AWS_BUCKET: ${AWS_BUCKET}
+      S3_KEY: ${S3_KEY}
+      S3_SECRET: ${S3_SECRET}
+      S3_BUCKET: ${S3_BUCKET}
+      S3_REGION: "eu-west-1"
     stdin_open: true
     volumes:
     - /var/www/html
