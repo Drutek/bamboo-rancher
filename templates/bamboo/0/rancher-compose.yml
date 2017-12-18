@@ -11,15 +11,15 @@
       label: "Provide a password for the database"
       type: password
       required: true
-    - variable: AWS_KEY
+    - variable: S3_KEY
       label: "AWS KEY for s3"
       type: string
       required: true
-    - variable: AWS_SECRET
+    - variable: S3_SECRET
       label: "AWS Secret for S3"
       type: string
       required: true
-    - variable: AWS_BUCKET
+    - variable: S3_BUCKET
       label: "Bucket Label for AWS S3"
       type: string
       required: true
