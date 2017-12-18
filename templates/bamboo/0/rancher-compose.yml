@@ -1,6 +1,6 @@
 .catalog:
- name: "Initial Version"
- version: "v0.0.1"
+ name: "AWS S3 Integration"
+ version: "v0.0.2"
  questions:
     - variable: DOMAIN_NAME
       label: "Provide a domain name for the project"
@@ -10,4 +10,16 @@
     - variable: DB_PASSWORD
       label: "Provide a password for the database"
       type: password
+      required: true
+    - variable: AWS_KEY
+      label: "AWS KEY for s3"
+      type: string
+      required: true
+    - variable: AWS_SECRET
+      label: "AWS Secret for S3"
+      type: string
+      required: true
+    - variable: AWS_BUCKET
+      label: "Bucket Label for AWS S3"
+      type: string
       required: true
