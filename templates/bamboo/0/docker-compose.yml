@@ -30,8 +30,6 @@ services:
     links:
     - Redis:redis
     - Database:database
-    ports:
-    - 80/tcp
     labels:
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: Composer,DrupalConsole,Drush
